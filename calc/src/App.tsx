@@ -15,8 +15,9 @@ function App() {
     <div id = "wrapper-full" className = "h-[65vh] w-[100vw] border">
       <Header title = "Calculator-react"></Header>
       
-      <div id = "output">
-        <p> calculations appear here</p>
+      <div id = "output" className='h-1/5 border bg-black w-9/10 m-auto p-2 flex-row'>
+        <p> calculations appear here...</p>
+        <p> Answers appear here...</p>
       </div>
 
     

@@ -19,7 +19,6 @@ const ButtonBlock: React.FC<ButtonBlockProps> = ({ content,style }) => {
   return (
     <div className='h-full w-full border'>
       {content.map((item,index) => {
-        console.log(item); // This logs each item in the content array
         return (
           <CalcButton 
             key={item.key}   // Use item.key as the key for React
