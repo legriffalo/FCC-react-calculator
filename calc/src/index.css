@@ -4,6 +4,7 @@
 
 
 #root{
-  height: 100%;
-  margin-top: 20%;
-  padding: 0;}
+  height: 80vh;
+  margin-top: 15vh;
+  padding: 2px;
+  background-color:white;}

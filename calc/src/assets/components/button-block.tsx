@@ -12,13 +12,13 @@ interface CalcButtonProps {
 
 interface ButtonBlockProps {
   content: CalcButtonProps[];
-  color:string; // Use the specific type for items in the array
+  style:string; // Use the specific type for items in the array
 }
 
-const ButtonBlock: React.FC<ButtonBlockProps> = ({ content,color }) => {
+const ButtonBlock: React.FC<ButtonBlockProps> = ({ content,style }) => {
   return (
     <div className='h-full w-full border'>
-      {content.map((item) => {
+      {content.map((item,index) => {
         console.log(item); // This logs each item in the content array
         return (
           <CalcButton 
@@ -26,7 +26,7 @@ const ButtonBlock: React.FC<ButtonBlockProps> = ({ content,color }) => {
             id={item.id}     // Pass item.id to CalcButton
             appearance={item.appearance} 
             code = {item.code} // Pass item.appearance to CalcButton
-            color = {color}
+            style = {index==9? "h-1/4 w-2/3 btn-warning":style}
           />
         );
       })}

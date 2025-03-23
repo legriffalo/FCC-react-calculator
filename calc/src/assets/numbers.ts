@@ -58,7 +58,14 @@ const numbers = [
         "id": "0",
         "appearance": "0",
         "code": "0"
-    }
+    },
+    {
+        "key": 11,
+        "id": ".",
+        "appearance": ".",
+        "code": "."
+    },
+
 ]
 
 export default numbers

@@ -6,7 +6,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 const Footer: React.FC = () => {
   return (
-    <div className = "fixed bottom-0 footer flex flex-row text-xl sm:footer-horizontal bg-neutral text-neutral-content p-10">
+    <div className = "fixed h-[10vh] bottom-0 left-0 footer flex flex-row text-xl sm:footer-horizontal bg-neutral text-neutral-content p-10">
         <a href = 'https://github.com/legriffalo' target = "_blank">
                 <FontAwesomeIcon icon={faGithub} />
         </a>

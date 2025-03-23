@@ -7,17 +7,16 @@ interface CalcButtonProps {
     appearance:string;
     key:number;
     code:string;
-    color:string;
+    style:string;
 
 
   }
 
-const CalcButton: React.FC<CalcButtonProps> = ({appearance,color }) => {
+const CalcButton: React.FC<CalcButtonProps> = ({appearance,style }) => {
   return (
-    <div className = {`h-full w-1/3 btn ${color}`}>
+    <div className = {`btn ${style}`}>
        <p>{appearance}</p>
-
-</div>
+    </div>
 
   );
 };
