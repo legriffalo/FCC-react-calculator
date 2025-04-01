@@ -1,24 +1,24 @@
 const symbols = [
   {
-    "id": "addition",
+    "id": "add",
     "appearance": "+",
     "code": "+",
     "key": 0
   },
   {
-    "id": "subtraction",
+    "id": "subtract",
     "appearance": "-",
     "code": "-",
     "key": 1
   },
   {
-    "id": "multiplication",
+    "id": "multiply",
     "appearance": "×",
     "code": "*",
     "key": 2
   },
   {
-    "id": "division",
+    "id": "divide",
     "appearance": "÷",
     "code": "/",
     "key": 3

@@ -1,17 +1,15 @@
 import React from 'react';
-// import { useState } from 'react';
 
 interface EqualsButtonProps {
     id:string;
+    handler:any,
   }
 
-const Equals: React.FC<EqualsButtonProps> = ({id}) => {
+const Equals: React.FC<EqualsButtonProps> = ({id, handler}) => {
   return (
-    <div id = {id} className = {`h-full w-1/2 btn btn-primary`}>
+    <div id = {id} onClick = {()=>handler()} className = {`h-full w-1/2 text-3xl rounded-2xl btn btn-primary`}>
        <p>=</p>
-
-</div>
-
+    </div>
   );
 };
 
