@@ -10,11 +10,17 @@ import Clear from './assets/components/clear.tsx'
 import Display from './assets/components/display.tsx'
 
 
+interface State {
+  calculation: string;
+  display: string;
+  answer: number | null;
+}
+
 function App() {
-  const[state, setState] = useState({
+  const[state, setState] = useState<State>({
     calculation:'',
     display: '',
-    answer:0,
+    answer: 0, 
   })
 
   const clearAll = ()=>{
@@ -29,27 +35,74 @@ function App() {
 
   const equals = ()=>{
     console.log("equals")
+
+    // if(regex1.test(state.calculation)){
+    //   setState(prevState => ({
+    //     ...prevState, 
+    //     calculation:String(state.answer) + state.calculation 
+    //   }));    }
+    // console.log(state)
+
+    const cleaned = operatorCleaner(state.calculation)
+    console.log(cleaned)
     let ans:number
     try{
-      ans = eval(state.calculation);
+      ans = eval(cleaned);
     } 
     catch(e){
       console.log(e)
     }
     setState(prevState => ({
       ...prevState, 
-      answer: ans
+      answer: ans,
+      display:String(ans),
+      calculation:String(ans) 
     }));
   }
 
-  const buttons = async (command:string, appearance:string) => {
-    await setState(prevState => ({
+  const buttons = (command:string, appearance:string) => {
+    const disp = syntaxCleaner(state.display,appearance)
+    const calc = syntaxCleaner(state.calculation,command)
+
+    setState(prevState => ({
       ...prevState, 
-      calculation: prevState.calculation + command,
-      display: prevState.display + appearance,
+      calculation: calc,
+      display: disp,
     }));
   };
 
+
+  const operatorCleaner = (expression:string)=>{
+    //match minuses preceded by another operator
+    const regex = /(?<=[+\-×*/])-\d+(?:\.\d+)?/g;
+    // match double math operators
+    const regex2 = /[+\-×*/^]+/g;
+    // check if starts with operator
+    const regex3 = /^[+\-×*/^]/;
+
+
+    let cleaned = expression.replace(regex, (match) => {
+          return `(${match})`; })
+    console.log(cleaned)
+    cleaned = cleaned.replace(regex2, (match) => {
+      return match.slice(-1); })
+    console.log(cleaned)
+    cleaned = regex3.test(cleaned)? `${state.answer}${cleaned}`: cleaned;
+    console.log(cleaned)
+  return cleaned
+  }
+
+  const syntaxCleaner = (expression:string, addition:string)=>{
+    const parts = (expression+addition).split(/([+\-*/%])/);
+    parts.forEach((part,i, array)=>{
+      // remove extra leading zeros
+      let cleaned = part.replace(/^00/, '0');
+      cleaned = cleaned.replace(/^0(?!\d*\.\d)/,'0');
+      array[i] = cleaned.replace(/(?<=\.[^.]*)\./,'');
+    })
+    const cleaned = parts.join('')
+    return cleaned
+  }
     // This effect runs every time `state` changes
     useEffect(() => {
       console.log(state);
@@ -61,13 +114,13 @@ function App() {
     <div id = "wrapper-full" className = "h-[72vh] w-[100vw] border text-2xl">
       <Header title = "Calculator-react"></Header>
       
-      <div id = "output" className='h-1/5 w-7/10  mt-[2vh] p-2 flex-row items-center m-auto border border-red bg-black  rounded-2xl'>
-        <Display id = "display" display = {state.display} answer = {state.answer}></Display>
+      <div id = "output" className='h-1/5 w-7/10  mt-[2vh] p-2 flex-row items-center m-auto border bg-black  rounded-2xl'>
+        <Display id = "display" display = {state.display? state.display:'0'}></Display>
       </div>
 
     
-    <div id = "all buttons" className = "m-auto mt-[1vh] w-7/10 h-5/7 bg-gray-900 p-2 rounded-2xl">
-        <div className = "h-4/5 w-7/10  flex flex-row border m-auto rounded-2xl">
+    <div id = "all buttons" className = "m-auto mt-[1vh] w-7/10 h-5/7 bg-gray-900 p-2 rounded-2xl border">
+        <div className = "h-4/5 w-7/10  flex flex-row m-auto rounded-2xl">
 
             <div id = "numblock" className = "w-2/3 flex">
               <ButtonBlock content = {numbers} handler = {buttons} style = "h-1/4 w-1/3 btn-warning rounded-2xl"></ButtonBlock>

@@ -2,7 +2,7 @@ import React from 'react';
 
 interface DisplayProps {
     id:string;
-    answer:number;
+    answer?:number;
     display:string;
   }
 
@@ -14,7 +14,7 @@ const Display: React.FC<DisplayProps> = ({id,answer, display }) => {
                 {display}
             </span> 
         </p>
-       <p id = "answer" className='w-3/10 h-2/3 text-5xl font-calculator'>{answer}</p>
+       {/* <p id = "answer" className='w-3/10 h-2/3 text-5xl font-calculator'>{answer}</p> */}
     </div>
 
   );
