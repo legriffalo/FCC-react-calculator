@@ -1,5 +1,7 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+// import React, { useState, flushSync } from 'react';
+import { flushSync } from 'react-dom'
+import { useState, useEffect} from 'react'
 import Footer from './assets/components/footer'
 import Header from './assets/components/header'
 import ButtonBlock from './assets/components/button-block.tsx'
@@ -16,22 +18,32 @@ interface State {
   answer: number | null;
 }
 
-function App() {
-  const[state, setState] = useState<State>({
-    calculation:'',
-    display: '',
-    answer: 0, 
-  })
+const State0 = {
+  calculation: '',
+  display: '',
+  answer: 0,
+}
 
-  const clearAll = ()=>{
+function App() {
+  const[state, setState] = useState<State>({...State0})
+
+  // const [forceUpdate, setForceUpdate] = useState(0); // dummy state to trigger re-render
+
+
+  const clearAll = () => {
     console.log("clear");
-    setState(prevState => ({
-      ...prevState, 
-      display: '',
-      calculation:'',
-      answer: 0,
-    }));
-  }
+
+    // Using flushSync to make sure the state update is synchronous
+    flushSync(() => {
+      setState({
+        display: '',
+        calculation: '',
+        answer: 0,
+      });
+    });
+
+    console.log("State cleared.");
+  };
 
   const equals = ()=>{
     console.log("equals")
@@ -93,6 +105,7 @@ function App() {
   }
 
   const syntaxCleaner = (expression:string, addition:string)=>{
+ 
     const parts = (expression+addition).split(/([+\-*/%])/);
     parts.forEach((part,i, array)=>{
       // remove extra leading zeros
