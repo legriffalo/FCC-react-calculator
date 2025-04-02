@@ -48,13 +48,6 @@ function App() {
   const equals = ()=>{
     console.log("equals")
 
-    // if(regex1.test(state.calculation)){
-    //   setState(prevState => ({
-    //     ...prevState, 
-    //     calculation:String(state.answer) + state.calculation 
-    //   }));    }
-    // console.log(state)
-
     const cleaned = operatorCleaner(state.calculation)
     console.log(cleaned)
     let ans:number
