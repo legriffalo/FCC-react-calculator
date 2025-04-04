@@ -117,7 +117,7 @@ function App() {
 
   return (
     <>
-    <div id = "wrapper-full" className = "h-[72vh] w-[100vw] border text-2xl">
+    <div id = "wrapper-full" className = "h-[72vh] w-[100vw] border text-xs md:text-2xl">
       <Header title = "Calculator-react"></Header>
       
       <div id = "output" className='h-1/5 w-7/10  mt-[2vh] p-2 flex-row items-center m-auto border bg-black  rounded-2xl'>
